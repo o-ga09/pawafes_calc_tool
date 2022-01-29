@@ -14,9 +14,19 @@ export default new Router({
       component: Index
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./pages/About.vue')
+      path: '/announce',
+      name: 'announce',
+      component: () => import('./pages/Announce.vue')
+    },
+    {
+      path: '/policy',
+      name: 'policy',
+      component: () => import('./pages/Policy.vue')
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('./pages/Feedback.vue')
     }
   ]
 })

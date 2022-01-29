@@ -1,11 +1,12 @@
 <template>
     <v-container>
-        <h1>Main</h1>
         <v-row>
             <v-col>
                 <v-container class="container1">
-                    <v-select class="select-list" :items="items" label="キャラクターを選択してください..." outlined v-model="selected"></v-select>
-
+                    <v-row>
+                        <v-select :items="items_character" label="キャラクターを選択してください..." outlined v-model="selected_character"></v-select>
+                        <v-select :items="items_support" label="サポートアイテムを選択してください" outlined v-model="selected_support"></v-select>
+                    </v-row>
                         <v-tabs v-model="tab" grow>
                             <v-tab>野手経験値</v-tab>
                             <v-tab>投手経験値</v-tab>
@@ -114,23 +115,23 @@
                             <v-container class="container2">
                                 <v-row>
                                     <v-col cols="2"><label>筋力</label></v-col>
-                                    <v-col cols="2"><v-text-field v-model="goukei['筋力']"></v-text-field></v-col>
+                                    <v-col cols="4"><v-text-field v-model="goukei['筋力']"></v-text-field></v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="2"><label>敏捷</label></v-col>
-                                    <v-col cols="2"><v-text-field v-model="goukei['敏捷']"></v-text-field></v-col>
+                                    <v-col cols="4"><v-text-field v-model="goukei['敏捷']"></v-text-field></v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="2"><label>技術</label></v-col>
-                                    <v-col cols="2"><v-text-field v-model="goukei['技術']"></v-text-field></v-col>
+                                    <v-col cols="4"><v-text-field v-model="goukei['技術']"></v-text-field></v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="2"><label>変化球</label></v-col>
-                                    <v-col cols="2"><v-text-field v-model="goukei['変化球']"></v-text-field></v-col>
+                                    <v-col cols="4"><v-text-field v-model="goukei['変化球']"></v-text-field></v-col>
                                 </v-row>
                                 <v-row>
                                     <v-col cols="2"><label>精神</label></v-col>
-                                    <v-col cols="2"><v-text-field v-model="goukei['精神']"></v-text-field></v-col>
+                                    <v-col cols="4"><v-text-field v-model="goukei['精神']"></v-text-field></v-col>
                                 </v-row>
                             </v-container>
                         </v-row>
@@ -163,8 +164,10 @@
     data: () => ({
               group: '',
               tab: null,
-              items: ['明星雪華','木場静香','七瀬はるか','緒川美羽','倉家凪','須神絵久','エミリ','神良美砂','嵐山美鈴','鴨川しぐれ','虹谷彩理','我間摩夕','姫野カレン','紺野美崎','黒沢愛','四条澄香'],
-              selected: '',
+              items_character: ['明星雪華','木場静香','七瀬はるか','緒川美羽','倉家凪','須神絵久','エミリ','神良美砂','嵐山美鈴','鴨川しぐれ','虹谷彩理','我間摩夕','姫野カレン','紺野美崎','黒沢愛','四条澄香'],
+              items_support: ['ルーキーのお守り','達人のお守り','アイテムなし'],
+              selected_character: '',
+              selected_support: '',
               count_hit: 0,
               count_twobase: 0,
               count_threebase: 0,
@@ -448,3 +451,11 @@
           }
     }
 </script>
+
+<style lang="scss" scoped>
+::v-deep .v-select__selections {
+  input {
+    width: 0;
+  }
+}
+</style>

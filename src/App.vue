@@ -53,17 +53,17 @@ export default {
       {
         name: 'お知らせ',
         icon: 'mdi-alert-circle',
-        link: '/about'
+        link: '/announce'
       },
       {
         name: 'プライバシーポリシー',
         icon: 'mdi-card-text',
-        link: '/about'
+        link: '/policy'
       },
       {
         name: 'フィードバックを送信',
         icon: 'mdi-message-alert',
-        link: '/about'
+        link: '/feedback'
       }
     ]
   }),
