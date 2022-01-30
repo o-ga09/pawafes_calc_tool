@@ -207,7 +207,7 @@
           }),
           methods: {
             counter(action,key) {
-                if (this.selected == '' || this.selected_support == '' || this.selected_num_of_tornament == '') {
+                if (this.selected == '' || this.selected_support == '') {
                     alert("キャラクター/サポートアイテムを選択してください...");
                     return
                 }

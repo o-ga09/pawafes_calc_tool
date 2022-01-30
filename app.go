@@ -252,14 +252,26 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 	var mag4 float32
 	var mag5 float32
 
-	reflectValue := reflect.ValueOf(*data)
-	reflectType := reflectValue.Type()
-	ap := isHelper(helper)
+	var difficulty float32
+
 	mag1 = 1.0
 	mag2 = 1.0
 	mag3 = 1.0
 	mag4 = 1.0
 	mag5 = 1.0
+
+	reflectValue := reflect.ValueOf(*data)
+	reflectType := reflectValue.Type()
+	ap := isHelper(helper)
+
+	switch supportitem {
+	case "ルーキーのお守り":
+		difficulty = 0.5
+	case "達人のお守り":
+		difficulty = 1.2
+	default:
+		difficulty = 1.0
+	}
 
 	if ap.bonus1 == "Power" || ap.bonus2 == "Power" {
 		mag1 = 1.6
@@ -273,6 +285,12 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 		mag5 = 1.6
 	}
 
+	mag1 *= difficulty
+	mag2 *= difficulty
+	mag3 *= difficulty
+	mag4 *= difficulty
+	mag5 *= difficulty
+
 	for i := 0; i < reflectValue.NumField(); i++ {
 		field := reflectType.Field(i)
 		switch field.Name {
@@ -281,25 +299,25 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 			data.Hit.Techni = int(5 * mag2)
 			data.Hit.Agile = int(8 * mag3)
 			data.Hit.Breaking_point = int(0 * mag4)
-			data.Hit.Mental = int(0 * mag5)
+			data.Hit.Mental = int(2 * mag5)
 		case "Twobase":
 			data.Twobase.Power = int(7 * mag1)
 			data.Twobase.Techni = int(5 * mag2)
 			data.Twobase.Agile = int(8 * mag3)
 			data.Twobase.Breaking_point = int(0 * mag4)
-			data.Twobase.Mental = int(0 * mag5)
+			data.Twobase.Mental = int(5 * mag5)
 		case "Threebase":
 			data.Threebase.Power = int(8 * mag1)
 			data.Threebase.Techni = int(5 * mag2)
 			data.Threebase.Agile = int(10 * mag3)
 			data.Threebase.Breaking_point = int(0 * mag4)
-			data.Threebase.Mental = int(0 * mag5)
+			data.Threebase.Mental = int(8 * mag5)
 		case "Homerun":
 			data.Homerun.Power = int(10 * mag1)
 			data.Homerun.Techni = int(5 * mag2)
 			data.Homerun.Agile = int(0 * mag3)
 			data.Homerun.Breaking_point = int(0 * mag4)
-			data.Homerun.Mental = int(0 * mag5)
+			data.Homerun.Mental = int(9 * mag5)
 		case "SacrificeBunt":
 			data.SacrificeBunt.Power = int(0 * mag1)
 			data.SacrificeBunt.Techni = int(4 * mag2)
@@ -323,49 +341,49 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 			data.Innings.Techni = int(1 * mag2)
 			data.Innings.Agile = int(1 * mag3)
 			data.Innings.Breaking_point = int(0 * mag4)
-			data.Innings.Mental = int(0 * mag5)
+			data.Innings.Mental = int(3 * mag5)
 		case "Outwithfastball":
 			data.Outwithfastball.Power = int(12 * mag1)
 			data.Outwithfastball.Techni = int(8 * mag2)
 			data.Outwithfastball.Agile = int(3 * mag3)
 			data.Outwithfastball.Breaking_point = int(5 * mag4)
-			data.Outwithfastball.Mental = int(0 * mag5)
+			data.Outwithfastball.Mental = int(14 * mag5)
 		case "Grounderwithfastball":
 			data.Grounderwithfastball.Power = int(9 * mag1)
 			data.Grounderwithfastball.Techni = int(9 * mag2)
 			data.Grounderwithfastball.Agile = int(4 * mag3)
 			data.Grounderwithfastball.Breaking_point = int(4 * mag4)
-			data.Grounderwithfastball.Mental = int(0 * mag5)
+			data.Grounderwithfastball.Mental = int(13 * mag5)
 		case "Popflywithfastball":
 			data.Popflywithfastball.Power = int(11 * mag1)
 			data.Popflywithfastball.Techni = int(7 * mag2)
 			data.Popflywithfastball.Agile = int(7 * mag3)
 			data.Popflywithfastball.Breaking_point = int(2 * mag4)
-			data.Popflywithfastball.Mental = int(0 * mag5)
+			data.Popflywithfastball.Mental = int(11 * mag5)
 		case "Outwithbreakingball":
 			data.Outwithbreakingball.Power = int(5 * mag1)
 			data.Outwithbreakingball.Techni = int(12 * mag2)
 			data.Outwithbreakingball.Agile = int(2 * mag3)
 			data.Outwithbreakingball.Breaking_point = int(21 * mag4)
-			data.Outwithbreakingball.Mental = int(0 * mag5)
+			data.Outwithbreakingball.Mental = int(14 * mag5)
 		case "Grounderwithbreakingball":
 			data.Grounderwithbreakingball.Power = int(2 * mag1)
 			data.Grounderwithbreakingball.Techni = int(13 * mag2)
 			data.Grounderwithbreakingball.Agile = int(3 * mag3)
 			data.Grounderwithbreakingball.Breaking_point = int(20 * mag4)
-			data.Grounderwithbreakingball.Mental = int(0 * mag5)
+			data.Grounderwithbreakingball.Mental = int(13 * mag5)
 		case "Popflywithbreaking":
 			data.Popflywithbreaking.Power = int(4 * mag1)
 			data.Popflywithbreaking.Techni = int(11 * mag2)
 			data.Popflywithbreaking.Agile = int(6 * mag3)
 			data.Popflywithbreaking.Breaking_point = int(18 * mag4)
-			data.Popflywithbreaking.Mental = int(0 * mag5)
+			data.Popflywithbreaking.Mental = int(11 * mag5)
 		case "Doubleplay":
 			data.Doubleplay.Power = int(3 * mag1)
 			data.Doubleplay.Techni = int(10 * mag2)
 			data.Doubleplay.Agile = int(10 * mag3)
 			data.Doubleplay.Breaking_point = int(5 * mag4)
-			data.Doubleplay.Mental = int(0 * mag5)
+			data.Doubleplay.Mental = int(10 * mag5)
 		default:
 			continue
 		}
