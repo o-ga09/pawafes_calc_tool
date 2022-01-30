@@ -31,6 +31,7 @@ type Score struct {
 
 type Outbound_Data struct {
 	Helper                   string `json:"helper"`
+	Supportitem              string `json:"supportitem"`
 	Hit                      Score  `json:"hit"`
 	Twobase                  Score  `json:"twobase"`
 	Threebase                Score  `json:"threebase"`
@@ -156,8 +157,10 @@ func ExecuteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	helper := data["helper"]
+	supportitem := data["supportitem"]
 	result.Helper = helper
-	isBehave(&result, helper)
+	result.Supportitem = supportitem
+	isBehave(&result, helper, supportitem)
 
 	res, err := json.MarshalIndent(result, "", "	")
 	if err != nil {
@@ -241,7 +244,7 @@ func isHelper(helper string) Assist_points {
 	return AP
 }
 
-func isBehave(data *Outbound_Data, helper string) {
+func isBehave(data *Outbound_Data, helper string, supportitem string) {
 	fmt.Printf("%p\n", &data)
 	var mag1 float32
 	var mag2 float32
