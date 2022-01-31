@@ -17,8 +17,11 @@ import (
 )
 
 type Assist_points struct {
-	bonus1 string
-	bonus2 string
+	bonus_power          float32
+	bonus_Agile          float32
+	bonus_Techni         float32
+	bonus_Breaking_point float32
+	bonus_Mental         float32
 }
 
 type Score struct {
@@ -192,53 +195,101 @@ func isHelper(helper string) Assist_points {
 
 	switch helper {
 	case "明星雪華":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "木場静香":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "Technical"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "七瀬はるか":
-		AP.bonus1 = "none"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "倉家凪":
-		AP.bonus1 = "Technical"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "須神絵久":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "Agile"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "エミリ":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "mental"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "神良美砂":
-		AP.bonus1 = "Agile"
-		AP.bonus2 = "mental"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "嵐山美鈴":
-		AP.bonus1 = "Agile"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "鴨川しぐれ":
-		AP.bonus1 = "Agile"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "虹谷彩理":
-		AP.bonus1 = "Technical"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "我間摩夕":
-		AP.bonus1 = "none"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "姫野カレン":
-		AP.bonus1 = "mental"
-		AP.bonus2 = "Breaking-point"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "紺野美崎":
-		AP.bonus1 = "none"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "黒沢愛":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	case "四条澄香":
-		AP.bonus1 = "Power"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	default:
-		AP.bonus1 = "none"
-		AP.bonus2 = "none"
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
 	}
 
 	return AP
@@ -254,15 +305,15 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 
 	var difficulty float32
 
-	mag1 = 1.0
-	mag2 = 1.0
-	mag3 = 1.0
-	mag4 = 1.0
-	mag5 = 1.0
-
 	reflectValue := reflect.ValueOf(*data)
 	reflectType := reflectValue.Type()
 	ap := isHelper(helper)
+
+	mag1 = ap.bonus_power
+	mag2 = ap.bonus_Agile
+	mag3 = ap.bonus_Techni
+	mag4 = ap.bonus_Breaking_point
+	mag5 = ap.bonus_Mental
 
 	switch supportitem {
 	case "ルーキーのお守り":
@@ -271,18 +322,6 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 		difficulty = 1.2
 	default:
 		difficulty = 1.0
-	}
-
-	if ap.bonus1 == "Power" || ap.bonus2 == "Power" {
-		mag1 = 1.6
-	} else if ap.bonus1 == "Technical" || ap.bonus2 == "Technical" {
-		mag2 = 1.6
-	} else if ap.bonus1 == "Agile" || ap.bonus2 == "Agile" {
-		mag3 = 1.6
-	} else if ap.bonus1 == "Breaking-point" || ap.bonus2 == "Breaking-point" {
-		mag4 = 1.6
-	} else if ap.bonus1 == "Mental" || ap.bonus2 == "Mental" {
-		mag5 = 1.6
 	}
 
 	mag1 *= difficulty
