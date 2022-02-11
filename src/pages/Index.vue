@@ -12,7 +12,10 @@
                         </v-col>
                         <v-col cols="8" sm="4">
                             <v-select :items="num_of_tornament" label="何回戦かを選択してください" outlined v-model="selected_num_of_tornament"></v-select>
-                        </v-col>                        
+                        </v-col> 
+                        <v-col cols="8" sm="4">
+                            <v-select :items="items_gokigen" label="サポートキャラクターのご機嫌度" outlined v-model="selected_gokigen"></v-select>
+                        </v-col>                  
                     </v-row>
                     <v-row>
                         <v-col cols="8" sm="6">
@@ -179,14 +182,16 @@
     data: () => ({
               group: '',
               tab: null,
-              items_character: ['明星雪華','木場静香','七瀬はるか','緒川美羽','倉家凪','須神絵久','エミリ','神良美砂','嵐山美鈴','鴨川しぐれ','虹谷彩理','我間摩夕','姫野カレン','紺野美崎','黒沢愛','四条澄香'],
+              items_character: ['明星雪華','木場静香','七瀬はるか','緒川美羽','倉家凪','須神絵久','エミリ','神良美砂','嵐山美鈴','鴨川しぐれ','虹谷彩理','我間摩夕','姫野カレン','紺野美崎','黒沢愛','四条澄香','栗原舞','咲須かのん','NCM-753','泡瀬満里南','片桐恋','片桐恋（ヤンデレ）','久根美亜','三ツ沢環','氷上聡里','日和ミヨ'],
               items_support: ['ルーキーのお守り','達人のお守り','アイテムなし'],
               num_of_tornament: ['1','2','3','4','final','boss'],
               lost_point: ['-1','-2','-3','-4'],
               goal_difference: ['-5','-4','-3','-2','-1','1','2','3','4','5','6','7','8','9','10'],
+              items_gokigen: ['1','2','3'],
               selected_character: '',
               selected_support: '',
               selected_num_of_tornament: '',
+              selected_gokigen: '',
               count_hit: 0,
               count_twobase: 0,
               count_threebase: 0,
@@ -207,7 +212,7 @@
           }),
           methods: {
             counter(action,key) {
-                if (this.selected == '' || this.selected_support == '') {
+                if (this.selected == '' || this.selected_support == '' || this.selected_gokigen == '') {
                     alert("キャラクター/サポートアイテムを選択してください...");
                     return
                 }
@@ -215,6 +220,7 @@
                     axios.post("http://127.0.0.1:80/execute",
                     {'helper':this.selected,
                      'supportitem':this.selected_support,
+                     'gokigen':this.selected_gokigen
                     })
                     .then(function(res) {
                     storage.setItem('point_data',JSON.stringify(res.data));
@@ -531,5 +537,8 @@
   .says p {
     margin: 0;
     padding: 0;
+  }
+  .v-select {
+      font-size: 0.5em;
   }
 </style>

@@ -161,9 +161,10 @@ func ExecuteHandler(w http.ResponseWriter, r *http.Request) {
 
 	helper := data["helper"]
 	supportitem := data["supportitem"]
+	gokigen := data["gokigen"]
 	result.Helper = helper
 	result.Supportitem = supportitem
-	isBehave(&result, helper, supportitem)
+	isBehave(&result, helper, supportitem, gokigen)
 
 	res, err := json.MarshalIndent(result, "", "	")
 	if err != nil {
@@ -190,55 +191,55 @@ func PolicyHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
-func isHelper(helper string) Assist_points {
+func isHelper(helper string, gokigen string) Assist_points {
 	var AP Assist_points
 
 	switch helper {
 	case "明星雪華":
-		AP.bonus_power = 1.0
+		AP.bonus_power = 1.3
 		AP.bonus_Agile = 1.0
 		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Breaking_point = 1.3
 		AP.bonus_Mental = 1.0
 	case "木場静香":
-		AP.bonus_power = 1.0
+		AP.bonus_power = 1.3
 		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
+		AP.bonus_Techni = 1.3
 		AP.bonus_Breaking_point = 1.0
 		AP.bonus_Mental = 1.0
 	case "七瀬はるか":
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
 		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Breaking_point = 1.6
 		AP.bonus_Mental = 1.0
 	case "倉家凪":
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
+		AP.bonus_Techni = 1.3
 		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_Mental = 1.3
 	case "須神絵久":
-		AP.bonus_power = 1.0
-		AP.bonus_Agile = 1.0
+		AP.bonus_power = 1.3
+		AP.bonus_Agile = 1.3
 		AP.bonus_Techni = 1.0
 		AP.bonus_Breaking_point = 1.0
 		AP.bonus_Mental = 1.0
 	case "エミリ":
-		AP.bonus_power = 1.0
+		AP.bonus_power = 1.3
 		AP.bonus_Agile = 1.0
 		AP.bonus_Techni = 1.0
 		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_Mental = 1.3
 	case "神良美砂":
 		AP.bonus_power = 1.0
-		AP.bonus_Agile = 1.0
+		AP.bonus_Agile = 1.3
 		AP.bonus_Techni = 1.0
 		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_Mental = 1.3
 	case "嵐山美鈴":
 		AP.bonus_power = 1.0
-		AP.bonus_Agile = 1.0
+		AP.bonus_Agile = 1.6
 		AP.bonus_Techni = 1.0
 		AP.bonus_Breaking_point = 1.0
 		AP.bonus_Mental = 1.0
@@ -246,34 +247,48 @@ func isHelper(helper string) Assist_points {
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
 		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_Breaking_point = 1.3
+		AP.bonus_Mental = 1.3
 	case "虹谷彩理":
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Techni = 1.3
+		AP.bonus_Breaking_point = 1.3
 		AP.bonus_Mental = 1.0
 	case "我間摩夕":
-		AP.bonus_power = 1.0
-		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_power = 1.6
+		AP.bonus_Agile = 1.6
+		AP.bonus_Techni = 1.6
+		AP.bonus_Breaking_point = 1.6
+		AP.bonus_Mental = 1.6
 	case "姫野カレン":
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		AP.bonus_Techni = 1.2
+		AP.bonus_Breaking_point = 1.2
+		AP.bonus_Mental = 1.2
 	case "紺野美崎":
-		AP.bonus_power = 1.0
-		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
-		AP.bonus_Breaking_point = 1.0
-		AP.bonus_Mental = 1.0
+		if gokigen == "1" {
+			AP.bonus_power = 1.3
+			AP.bonus_Agile = 1.3
+			AP.bonus_Techni = 1.3
+			AP.bonus_Breaking_point = 1.3
+			AP.bonus_Mental = 1.3
+		} else if gokigen == "2" {
+			AP.bonus_power = 1.4
+			AP.bonus_Agile = 1.4
+			AP.bonus_Techni = 1.4
+			AP.bonus_Breaking_point = 1.4
+			AP.bonus_Mental = 1.4
+		} else {
+			AP.bonus_power = 1.5
+			AP.bonus_Agile = 1.5
+			AP.bonus_Techni = 1.5
+			AP.bonus_Breaking_point = 1.5
+			AP.bonus_Mental = 1.5
+		}
 	case "黒沢愛":
-		AP.bonus_power = 1.0
+		AP.bonus_power = 1.6
 		AP.bonus_Agile = 1.0
 		AP.bonus_Techni = 1.0
 		AP.bonus_Breaking_point = 1.0
@@ -281,9 +296,77 @@ func isHelper(helper string) Assist_points {
 	case "四条澄香":
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
-		AP.bonus_Techni = 1.0
+		AP.bonus_Techni = 1.6
 		AP.bonus_Breaking_point = 1.0
 		AP.bonus_Mental = 1.0
+	case "栗原舞":
+		if gokigen == "3" {
+			AP.bonus_power = 1.6
+			AP.bonus_Agile = 1.6
+			AP.bonus_Techni = 1.6
+			AP.bonus_Breaking_point = 1.6
+			AP.bonus_Mental = 1.6
+		} else {
+			AP.bonus_power = 1.0
+			AP.bonus_Agile = 1.0
+			AP.bonus_Techni = 1.0
+			AP.bonus_Breaking_point = 1.0
+			AP.bonus_Mental = 1.0
+		}
+	case "咲須かのん":
+		AP.bonus_power = 1.2
+		AP.bonus_Agile = 1.2
+		AP.bonus_Techni = 1.2
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
+	case "NCM-753":
+		AP.bonus_power = 1.2
+		AP.bonus_Agile = 1.2
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.2
+	case "泡瀬満里南":
+		AP.bonus_power = 1.2
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.2
+		AP.bonus_Breaking_point = 1.2
+		AP.bonus_Mental = 1.0
+	case "片桐恋":
+		AP.bonus_power = 1.2
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.2
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.2
+	case "片桐恋（ヤンデレ）":
+		AP.bonus_power = 1.4
+		AP.bonus_Agile = 1.4
+		AP.bonus_Techni = 1.4
+		AP.bonus_Breaking_point = 1.4
+		AP.bonus_Mental = 1.4
+	case "久根美亜":
+		AP.bonus_power = 1.2
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.2
+		AP.bonus_Mental = 1.2
+	case "三ツ沢環":
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.2
+		AP.bonus_Techni = 1.2
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.2
+	case "氷上聡里":
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.3
+		AP.bonus_Techni = 1.3
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.0
+	case "日和ミヨ":
+		AP.bonus_power = 1.0
+		AP.bonus_Agile = 1.0
+		AP.bonus_Techni = 1.0
+		AP.bonus_Breaking_point = 1.0
+		AP.bonus_Mental = 1.6
 	default:
 		AP.bonus_power = 1.0
 		AP.bonus_Agile = 1.0
@@ -295,7 +378,7 @@ func isHelper(helper string) Assist_points {
 	return AP
 }
 
-func isBehave(data *Outbound_Data, helper string, supportitem string) {
+func isBehave(data *Outbound_Data, helper string, supportitem string, gokigen string) {
 	fmt.Printf("%p\n", &data)
 	var mag1 float32
 	var mag2 float32
@@ -307,7 +390,7 @@ func isBehave(data *Outbound_Data, helper string, supportitem string) {
 
 	reflectValue := reflect.ValueOf(*data)
 	reflectType := reflectValue.Type()
-	ap := isHelper(helper)
+	ap := isHelper(helper, gokigen)
 
 	mag1 = ap.bonus_power
 	mag2 = ap.bonus_Agile
