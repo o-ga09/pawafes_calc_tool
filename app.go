@@ -114,7 +114,7 @@ func stgServer() {
 	//mux.HandleFunc("/feedback", FeedbackHandler)
 	//mux.HandleFunc("/policy", PolicyHandler)
 
-	if err := http.ListenAndServe(":80", mux); err != nil {
+	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -173,6 +173,10 @@ func ExecuteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	w.WriteHeader(http.StatusOK)
 	w.Write(res)
 }
 

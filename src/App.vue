@@ -21,19 +21,19 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar color="primary" dark app clipped-left>
+    <v-app-bar color="light-blue accent-2" dark app clipped-left>
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title><h1>パワフェス経験値計算 〜Pawafes point Calculator 2021〜</h1></v-toolbar-title>
+      <v-toolbar-title class="text-h4">パワフェス経験値計算 〜Pawafes point Calculator 2021〜</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn outlined>tweet</v-btn>
+      <v-btn outlined><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></v-btn>
     </v-app-bar>
 
     <v-main>
       <router-view />
     </v-main>
 
-    <v-footer color="primary" dark app>
-      fuga
+    <v-footer color="light-blue accent-2" dark app>
+      &copy;パワフェス計算ツール
     </v-footer>
   </v-app>
 </template>

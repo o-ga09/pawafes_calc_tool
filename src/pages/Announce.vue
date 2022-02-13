@@ -15,8 +15,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>2021/11/25</td>
-                                    <td>テスト</td>
+                                    <td>2022/2/13</td>
+                                    <td>α版リリース</td>
                                 </tr>
                             </tbody>
                         </template>

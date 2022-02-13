@@ -4,19 +4,21 @@
             <v-col>
                 <v-container class="container1">
                     <v-row>
-                        <v-col cols="8" sm="4">
-                            <v-select :items="items_character" label="キャラクターを選択してください" outlined v-model="selected_character"></v-select>
+                        <v-col cols="8" sm="6">
+                            <v-select :items="items_character" label="サポートキャラを選択" outlined v-model="selected_character"></v-select>
                         </v-col>
-                        <v-col cols="8" sm="4">
+                        <v-col cols="8" sm="6">
                              <v-select :items="items_support" label="難易度を選択してください" outlined v-model="selected_support"></v-select>
                         </v-col>
-                        <v-col cols="8" sm="4">
+                    </v-row>
+                    <v-row>
+                        <v-col cols="8" sm="6">
                             <v-select :items="num_of_tornament" label="何回戦かを選択してください" outlined v-model="selected_num_of_tornament"></v-select>
                         </v-col> 
-                        <v-col cols="8" sm="4">
-                            <v-select :items="items_gokigen" label="サポートキャラクターのご機嫌度" outlined v-model="selected_gokigen"></v-select>
-                        </v-col>                  
-                    </v-row>
+                        <v-col cols="8" sm="6">
+                            <v-select :items="items_gokigen" label="サポートキャラのご機嫌度" outlined v-model="selected_gokigen"></v-select>
+                        </v-col>  
+                    </v-row>                
                     <v-row>
                         <v-col cols="8" sm="6">
                             <v-select :items="lost_point" label="失点数を入力してください" outlined v-model="selected_lost_point"></v-select>
@@ -126,7 +128,7 @@
                                     </v-row>
                                 </v-tab-item>
                         </v-tabs-items>
-                        </v-container>
+                    </v-container>
                     </v-col>
                     <v-col>
                         <v-row>
@@ -154,18 +156,21 @@
                             </v-container>
                         </v-row>
                         
-                <v-row>
-                    <div class="balloon6">
-                        <div class="faceicon">
-                            <img src="../assets/yabe.png" width="150px" height="150px">
-                        </div>
-                        <div class="chatting">
-                            <div class="says">
-                                <p>{{ yabes_message }}</p>
+                        <v-row>
+                            <v-btn color="red accent-2" elevation="2" outlined v-on:click="reset">リセット</v-btn>
+                        </v-row>
+                        <v-row>
+                            <div class="balloon6">
+                                <div class="faceicon">
+                                    <img src="../assets/yabe.png" width="150px" height="150px">
+                                </div>
+                                <div class="chatting">
+                                    <div class="says">
+                                        <p>{{ yabes_message }}</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </v-row>
+                        </v-row>
             </v-col>
         </v-row>
     </v-container>
@@ -173,13 +178,16 @@
 
 <script>
     import axios from 'axios'
+    const headers = {
+        'Content-Type': 'application/json',
+    };
     var storage = localStorage;
-    var server_flg = 0;
     var getSessionStorageData;
   export default {
     name: 'index',
 
     data: () => ({
+              server_flg: 0,
               group: '',
               tab: null,
               items_character: ['明星雪華','木場静香','七瀬はるか','緒川美羽','倉家凪','須神絵久','エミリ','神良美砂','嵐山美鈴','鴨川しぐれ','虹谷彩理','我間摩夕','姫野カレン','紺野美崎','黒沢愛','四条澄香','栗原舞','咲須かのん','NCM-753','泡瀬満里南','片桐恋','片桐恋（ヤンデレ）','久根美亜','三ツ沢環','氷上聡里','日和ミヨ'],
@@ -216,19 +224,21 @@
                     alert("キャラクター/サポートアイテムを選択してください...");
                     return
                 }
-                if (server_flg == 0) {
-                    axios.post("http://127.0.0.1:80/execute",
+                if (this.server_flg == 0) {
+                    axios.post("http://127.0.0.1:8080/execute",
                     {'helper':this.selected,
                      'supportitem':this.selected_support,
                      'gokigen':this.selected_gokigen
+                    },{headers:headers
                     })
                     .then(function(res) {
                     storage.setItem('point_data',JSON.stringify(res.data));
                     });
-                    server_flg = 1;
+                    this.server_flg = 1;
+                    console.log("server : ok")
                 }
-
                 getSessionStorageData = JSON.parse(storage.getItem('point_data'));
+                console.log(getSessionStorageData);
                 if (key == '+') {
                     switch (action) {
                         case 'hit' :
@@ -476,6 +486,48 @@
                             this.goukei['精神'] -= getSessionStorageData.Doubleplay.mental;
                             break;
                     }
+                    this.isnegative();
+                }
+            },
+            reset() {
+                this.server_flg = 0;
+                this.selected_num_of_tornament = '';
+                this.selected_gokigen = '';
+                this.selected_character = '';
+                this.selected_support = '';
+                this.count_hit = 0;
+                this.count_twobase = 0;
+                this.count_threebase = 0;
+                this.count_homerun = 0;
+                this.count_bunt = 0;
+                this.count_fly = 0;
+                this.count_steal = 0;
+                this.count_inings = 0;
+                this.count_sunsinwithfastball = 0;
+                this.count_gorowithfastball = 0;
+                this.count_flywithfastball = 0;
+                this.count_sunsinwithbreakingball = 0;
+                this.count_gorowithbreakingball = 0;
+                this.count_flywithbreakingball = 0;
+                this.count_gettsu = 0;
+                this.goukei = {'筋力':0,'敏捷':0,'技術':0,'変化球':0,'精神':0};
+                storage.clear();
+            },
+            isnegative() {
+                if (this.goukei['筋力'] <= 0){
+                    this.goukei['筋力'] = 0;
+                }
+                if (this.goukei['敏捷'] <= 0){
+                    this.goukei['敏捷'] = 0;
+                }
+                if (this.goukei['技術'] <= 0){
+                    this.goukei['技術'] = 0;
+                }
+                if (this.goukei['変化球'] <= 0){
+                    this.goukei['変化球'] = 0;
+                }
+                if (this.goukei['精神'] <= 0){
+                    this.goukei['精神'] = 0;
                 }
             }
           }
@@ -539,6 +591,6 @@
     padding: 0;
   }
   .v-select {
-      font-size: 0.5em;
+      font-size: 1.0em;
   }
 </style>
