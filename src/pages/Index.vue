@@ -181,7 +181,7 @@
     const headers = {
         'Content-Type': 'application/json',
     };
-    var storage = localStorage;
+    var storage = sessionStorage;
     var getSessionStorageData;
   export default {
     name: 'index',
@@ -219,26 +219,27 @@
               yabes_message: '左側の＋／ーを押してほしいでやんす！！！'
           }),
           methods: {
-            counter(action,key) {
-                if (this.selected == '' || this.selected_support == '' || this.selected_gokigen == '') {
+            async counter(action,key) {
+                if (this.selected_character == '' || this.selected_support == '' || this.selected_gokigen == '') {
                     alert("キャラクター/サポートアイテムを選択してください...");
                     return
                 }
+
+                console.log(this.server_flg + ":" + this.getSessionStorageData);
                 if (this.server_flg == 0) {
-                    axios.post("http://127.0.0.1:8080/execute",
-                    {'helper':this.selected,
+                    await axios.post("http://127.0.0.1:8080/execute",
+                    {'helper':this.selected_character,
                      'supportitem':this.selected_support,
-                     'gokigen':this.selected_gokigen
+                     'gokigen':this.selected_gokigen,
                     },{headers:headers
                     })
                     .then(function(res) {
                     storage.setItem('point_data',JSON.stringify(res.data));
+                    getSessionStorageData = JSON.parse(storage.getItem('point_data'));
                     });
                     this.server_flg = 1;
-                    console.log("server : ok")
                 }
-                getSessionStorageData = JSON.parse(storage.getItem('point_data'));
-                console.log(getSessionStorageData);
+
                 if (key == '+') {
                     switch (action) {
                         case 'hit' :
@@ -511,7 +512,7 @@
                 this.count_flywithbreakingball = 0;
                 this.count_gettsu = 0;
                 this.goukei = {'筋力':0,'敏捷':0,'技術':0,'変化球':0,'精神':0};
-                storage.clear();
+                storage.removeItem('point_data');
             },
             isnegative() {
                 if (this.goukei['筋力'] <= 0){

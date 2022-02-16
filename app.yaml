@@ -15,8 +15,8 @@ handlers:
   - url: /$
     static_files: dist/index.html
     upload: dist/index.html
-  - url: /(.+\.(html|css|js|gif|png|jpg))$
+  - url: /(.+\.(html|css|js|gif|png|jpg|ico))$
     static_files: dist/\1
-    upload: public/.+\.(html|css|js|gif|png|jpg)$
+    upload: public/.+\.(html|css|js|gif|png|jpg|ico)$
   - url: /.*
     script: auto

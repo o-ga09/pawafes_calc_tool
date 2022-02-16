@@ -35,6 +35,7 @@ type Score struct {
 type Outbound_Data struct {
 	Helper                   string `json:"helper"`
 	Supportitem              string `json:"supportitem"`
+	Gokigen                  string `json:"gokigen"`
 	Hit                      Score  `json:"hit"`
 	Twobase                  Score  `json:"twobase"`
 	Threebase                Score  `json:"threebase"`
@@ -114,9 +115,11 @@ func stgServer() {
 	//mux.HandleFunc("/feedback", FeedbackHandler)
 	//mux.HandleFunc("/policy", PolicyHandler)
 
-	if err := http.ListenAndServe(":8080", mux); err != nil {
-		log.Fatal(err)
-	}
+	// if err := http.ListenAndServe(":1234", mux); err != nil {
+	// 	log.Fatal(err)
+	// }
+	port := "22222"
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
@@ -178,6 +181,9 @@ func ExecuteHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	w.WriteHeader(http.StatusOK)
 	w.Write(res)
+	fmt.Println(helper)
+	fmt.Println(supportitem)
+	fmt.Println(result)
 }
 
 func AnnounceHandler(w http.ResponseWriter, r *http.Request) {
