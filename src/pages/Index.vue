@@ -227,7 +227,7 @@
 
                 console.log(this.server_flg + ":" + this.getSessionStorageData);
                 if (this.server_flg == 0) {
-                    await axios.post("http://127.0.0.1:8080/execute",
+                    await axios.post("/execute",
                     {'helper':this.selected_character,
                      'supportitem':this.selected_support,
                      'gokigen':this.selected_gokigen,

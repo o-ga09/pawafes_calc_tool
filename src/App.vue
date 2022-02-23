@@ -25,7 +25,7 @@
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-h4">パワフェス経験値計算 〜Pawafes point Calculator 2021〜</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn outlined><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></v-btn>
+      <!-- <v-btn outlined><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></v-btn> -->
     </v-app-bar>
 
     <v-main>

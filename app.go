@@ -115,11 +115,9 @@ func stgServer() {
 	//mux.HandleFunc("/feedback", FeedbackHandler)
 	//mux.HandleFunc("/policy", PolicyHandler)
 
-	// if err := http.ListenAndServe(":1234", mux); err != nil {
-	// 	log.Fatal(err)
-	// }
-	port := "22222"
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+	if err := http.ListenAndServe(":8080", mux); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func redirect(w http.ResponseWriter, req *http.Request) {
