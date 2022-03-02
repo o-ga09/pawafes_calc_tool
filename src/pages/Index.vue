@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="pc">
+        <div v-if="$mq === 'pc'">
             <v-container>
                 <v-row>
                     <v-col>
@@ -178,7 +178,7 @@
             </v-container>
         </div>
 
-        <div v-if="sp">
+        <div v-if="$mq === 'sp'">
             <v-container>
                 <v-row>
                     <v-col>
@@ -307,32 +307,7 @@
                                 </v-tabs-items>
                             </v-container>
                             </v-col>
-                            <v-col>
-                                <v-row justify="center">
-                                    <v-container fill-height class="container2">
-                                        <v-row justify="center">
-                                            <v-col cols="4"><label>筋力</label></v-col>
-                                            <v-col cols="8"><v-text-field v-model="goukei['筋力']"></v-text-field></v-col>
-                                        </v-row>
-                                        <v-row justify="center">
-                                            <v-col cols="4"><label>敏捷</label></v-col>
-                                            <v-col cols="8"><v-text-field v-model="goukei['敏捷']"></v-text-field></v-col>
-                                        </v-row>
-                                        <v-row justify="center">
-                                            <v-col cols="4"><label>技術</label></v-col>
-                                            <v-col cols="8"><v-text-field v-model="goukei['技術']"></v-text-field></v-col>
-                                        </v-row>
-                                        <v-row justify="center">
-                                            <v-col cols="4"><label>変化球</label></v-col>
-                                            <v-col cols="8"><v-text-field v-model="goukei['変化球']"></v-text-field></v-col>
-                                        </v-row>
-                                        <v-row justify="center">
-                                            <v-col cols="4"><label>精神</label></v-col>
-                                            <v-col cols="8"><v-text-field v-model="goukei['精神']"></v-text-field></v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-row>
-                                
+                            <v-col>                                
                                 <v-row justify="center">
                                     <v-btn color="red accent-2" elevation="2" outlined v-on:click="reset">リセット</v-btn>
                                 </v-row>
@@ -348,7 +323,14 @@
                                         </div>
                                     </div>
                                 </v-row>
-                    </v-col>
+                                <v-row>
+                                    <v-container>
+                                        <table border="1">
+                                            <tr><th v-for="thead in theads" v-bind:key="thead">{{thead}}</th></tr>
+                                            <tr><td v-for="tdata in goukei" v-bind:key="tdata">{{tdata}}</td></tr>
+                                        </table>
+                                    </v-container>
+                                </v-row>
                 </v-row>
             </v-container>
         </div>
@@ -395,6 +377,7 @@
               count_flywithbreakingball: 0,
               count_gettsu: 0,
               goukei: {'筋力':0,'敏捷':0,'技術':0,'変化球':0,'精神':0},
+              theads: ['筋力','敏捷','技術','変化球','精神'],
               yabes_message: '左側の＋／ーを押してほしいでやんす！！！'
           }),
           methods: {

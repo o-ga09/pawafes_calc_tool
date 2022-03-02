@@ -4,7 +4,7 @@ import VueMq from 'vue-mq'
 Vue.use(VueMq, {
   breakpoints: {
     sp: 959,
-    pc: 960
+    pc: Infinity
   },
   defaultBreakpoint: 'sp'
 })

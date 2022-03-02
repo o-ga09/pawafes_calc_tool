@@ -1,12 +1,11 @@
-const webpack = require('webpack'); 
 module.exports = {
+  pages:{
+    index: {
+      entry : "src/main.js",
+      title : "パワフェス計算ツール"
+    }
+  },
   transpileDependencies: [
     'vuetify'
-  ],
-  configureWebpack: { 
-    plugins: [
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),   
-      '~/plugins/vue-mq'
-    ]
-  }
+  ]
 }

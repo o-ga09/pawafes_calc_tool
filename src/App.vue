@@ -64,6 +64,11 @@ export default {
         name: 'フィードバックを送信',
         icon: 'mdi-message-alert',
         link: '/feedback'
+      },
+            {
+        name: 'Test',
+        icon: 'mdi-message-alert',
+        link: '/test'
       }
     ]
   }),
