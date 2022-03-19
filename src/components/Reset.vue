@@ -38,7 +38,7 @@ export default {
         return this.$props.selectedPram
       },
       set(value) {
-        this.$emit("update_param",value)
+        this.$emit("update_pram",value)
       }
     },
     innerCounters: {
