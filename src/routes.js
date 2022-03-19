@@ -28,11 +28,6 @@ export default new Router({
       path: '/feedback',
       name: 'feedback',
       component: () => import('./pages/Feedback.vue')
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: () => import('./pages/Test.vue')
     }
   ]
 })

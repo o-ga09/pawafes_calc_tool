@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-if="$mq === 'pc'">
-      <SelectParameterPc :selectedpram="selected_pram" @update_param="receivePram"/>
+      <SelectParameterPc :selectedpram="selected_pram" @update_pram="receivePram"/>
       <CalcCount :counters="counters" :goukei="goukei" :serverflg="server_flg" @update_goukei="receiveGoukei" @update_counter="receiveCounter" @update_server_flg="receiveServerflg" />
       <DisplayTotal :goukei="goukei" />
-      <ResetCalc :counters="counters" :goukei="goukei" @update_goukei="receiveGoukei" @update_counter="receiveCounter" />
+      <ResetCalc :selectedpram="selected_parm" :counters="counters" :goukei="goukei" :serverflg="server_flg" @update_pram="receivePram" @update_goukei="receiveGoukei" @update_counter="receiveCounter" @update_server_flg="receiveServerflg" />
     </div>
 
     <div v-if="$mq === 'sp'">
       <SelectParameterSp :selectedpram="selectedPram" @update_param="receivePram"/>
-      <CalcCount :counters="counters" :goukei="goukei" @update_goukei="receiveGoukei" @update_counter="receiveCounter" />
-      <ResetCalc :counters="counters" :goukei="goukei" @update_goukei="receiveGoukei" @update_counter="receiveCounter" />
+      <CalcCount :counters="counters" :goukei="goukei" :serverflg="server_flg" @update_goukei="receiveGoukei" @update_counter="receiveCounter" @update_server_flg="receiveServerflg" />
+      <ResetCalc :selectedpram="selected_parm" :counters="counters" :goukei="goukei" :serverflg="server_flg" @update_pram="receivePram" @update_goukei="receiveGoukei" @update_counter="receiveCounter" @update_server_flg="receiveServerflg" />
       <FlexFooter :goukei="goukei" />
     </div>
   </div>

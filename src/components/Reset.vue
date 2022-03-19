@@ -17,37 +17,80 @@
 </template>
 
 <script>
+var storage = sessionStorage
+
 export default {
   name: "ResetCalc",
+  props: {
+    selectedPram: {type:Number,default:0},
+    counters: {type:Number,default:0},
+    goukei: {type:Number,dafault:0},
+    serverflg: {type:Number,default:0}
+  },
 
   data: () => ({
     yabes_message: "左側の＋／ーを押してほしいでやんす！！！",
   }),
 
+  computed: {
+    innerSelectedPram: {
+      get() {
+        return this.$props.selectedPram
+      },
+      set(value) {
+        this.$emit("update_param",value)
+      }
+    },
+    innerCounters: {
+      get() {
+        return this.$props.counters
+      },
+      set(value) {
+        this.$emit("update_counter",value)
+      }
+    },
+    innerGoukei: {
+      get() {
+        return this.$props.goukei
+      },
+      set(value) {
+        this.$emit("update_goukei",value)
+      }
+    },
+    innerServerflg: {
+      get() {
+        return this.$props.serverflg
+      },
+      set(value) {
+        this.$emit("update_server_flg",value)
+      }
+    }
+  },
+
   methods: {
     reset() {
-      this.$parent.server_flg = 0;
-      this.$parent.selected_num_of_tornament = "";
-      this.$parent.selected_gokigen = "";
-      this.$parent.selected_character = "";
-      this.$parent.selected_support = "";
-      this.$parent.count_hit = 0;
-      this.$parent.count_twobase = 0;
-      this.$parent.count_threebase = 0;
-      this.$parent.count_homerun = 0;
-      this.$parent.count_bunt = 0;
-      this.$parent.count_fly = 0;
-      this.$parent.count_steal = 0;
-      this.$parent.count_inings = 0;
-      this.$parent.count_sunsinwithfastball = 0;
-      this.$parent.count_gorowithfastball = 0;
-      this.$parent.count_flywithfastball = 0;
-      this.$parent.count_sunsinwithbreakingball = 0;
-      this.$parent.count_gorowithbreakingball = 0;
-      this.$parent.count_flywithbreakingball = 0;
-      this.$parent.count_gettsu = 0;
-      this.$parent.goukei = { 筋力: 0, 敏捷: 0, 技術: 0, 変化球: 0, 精神: 0 };
-      this.$parent.storage.removeItem("point_data");
+      this.innerServerflg = 0;
+      this.innerSelectedPram.selected_num_of_tornament = "";
+      this.innerSelectedPram.selected_gokigen = "";
+      this.innerSelectedPram.selected_character = "";
+      this.innerSelectedPram.selected_support = "";
+      this.innerCounters.count_hit = 0;
+      this.innerCounters.count_twobase = 0;
+      this.innerCounters.count_threebase = 0;
+      this.innerCounters.count_homerun = 0;
+      this.innerCounters.count_bunt = 0;
+      this.innerCounters.count_fly = 0;
+      this.innerCounters.count_steal = 0;
+      this.innerCounters.count_inings = 0;
+      this.innerCounters.count_sunsinwithfastball = 0;
+      this.innerCounters.count_gorowithfastball = 0;
+      this.innerCounters.count_flywithfastball = 0;
+      this.innerCounters.count_sunsinwithbreakingball = 0;
+      this.innerCounters.count_gorowithbreakingball = 0;
+      this.innerCounters.count_flywithbreakingball = 0;
+      this.innerCounters.count_gettsu = 0;
+      this.innerGoukei.goukei = { 筋力: 0, 敏捷: 0, 技術: 0, 変化球: 0, 精神: 0 };
+      storage.removeItem("point_data");
     },
   },
 };

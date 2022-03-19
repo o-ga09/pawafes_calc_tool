@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer app v-model="drawer" clipped>
+    <v-navigation-drawer v-model="drawer" app clipped>
       <v-container>
         <v-list-item>
           <v-list-item-content>
@@ -64,11 +64,6 @@ export default {
         name: 'フィードバックを送信',
         icon: 'mdi-message-alert',
         link: '/feedback'
-      },
-            {
-        name: 'Test',
-        icon: 'mdi-message-alert',
-        link: '/test'
       }
     ]
   }),
