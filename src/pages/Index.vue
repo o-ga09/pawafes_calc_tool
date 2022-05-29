@@ -184,7 +184,8 @@
     var storage = sessionStorage;
     var getSessionStorageData;
   export default {
-    name: 'index',
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: "index",
 
     data: () => ({
               server_flg: 0,
